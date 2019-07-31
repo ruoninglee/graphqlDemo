@@ -1,0 +1,75 @@
+{
+	"info": {
+		"_postman_id": "6e77fb95-bb4a-455e-9e6d-a079827d6693",
+		"name": "graphqlDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/graphql?query={blocks { id blockNumber txs { price timestamp }}}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql?query={blocks { id blockNumber txs { price timestamp }}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{blocks { id blockNumber txs { price timestamp }}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/graphql",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": \"mutation createTx($blockId: String!, $tx: TransactionInput!) { createTx(blockId: $blockId, tx: $tx) { price timestamp } }\",\n  \"operationName\": \"createTx\",\n  \"variables\": { \"blockId\": \"1\", \"tx\": {\"price\": \"123\", \"timestamp\": \"2019-07-31T05:15:40+08:00\"}}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/graphql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"graphql"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "mutation createTx($blockId: String!, $tx: TransactionInput!) {\n  createTx(blockId: $blockId, tx: $tx) {\n    price\n    timestamp\n  }\n}",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
