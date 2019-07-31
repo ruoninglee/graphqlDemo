@@ -1,7 +1,7 @@
 import "reflect-metadata";
-import {Arg, Query, Resolver} from "type-graphql";
+import {Arg, Mutation, Query, Resolver} from "type-graphql";
 import {BlockService} from "./service";
-import {Block} from "./model";
+import {Block, Transaction} from "./model";
 
 @Resolver()
 export class BlockResolver {
@@ -15,10 +15,10 @@ export class BlockResolver {
         return this.graphqlService.getBlocks();
     }
 
-    // @Query(returns => Block)
-    // async addTxn(
-    //     @Arg("blockId") blockId: string, @Arg("txPrice") txPrice: number): Promise<Block> {
-    //     return this.graphqlService.saveTx(blockId, txPrice);
-    // }
+    @Mutation(returns => Transaction)
+    async createTx(
+        @Arg("blockId") blockId: string, @Arg("tx") tx: Transaction): Promise<Transaction> {
+        return this.graphqlService.saveTx(blockId, tx);
+    }
 
 }

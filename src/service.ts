@@ -1,6 +1,7 @@
 import {Service} from "typedi";
 import {Block, Transaction} from "./model";
 import {DateTime} from "luxon";
+import BigNumber from "bignumber.js";
 
 @Service()
 export class BlockService {
@@ -8,9 +9,9 @@ export class BlockService {
     }
 
     mockTxs: Transaction[] = [
-        Transaction.create("1", "123000000", new Date()),
-        Transaction.create("2", "123000000", new Date()),
-        Transaction.create("3", "123000000", new Date()),
+        Transaction.create(new BigNumber("123000000"), DateTime.utc()),
+        Transaction.create(new BigNumber("123000000"), DateTime.utc()),
+        Transaction.create(new BigNumber("123000000"), DateTime.utc()),
     ];
     mockBlocks: Block[] = [
         Block.create("1", "1", this.mockTxs),
@@ -22,7 +23,8 @@ export class BlockService {
         return this.mockBlocks;
     }
 
-    async saveTx(blockId: string, price: number): Promise<Block> {
-        return new Block();
+    async saveTx(blockId: string, tx: Transaction): Promise<Transaction> {
+        return Transaction.create(tx.price, tx.timestamp);
     }
+    
 }

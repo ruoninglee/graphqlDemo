@@ -1,6 +1,6 @@
 import {GraphQLScalarType, Kind} from "graphql";
-import BigNumber from "bignumber";
 import {fromIso, toIso} from "./Time";
+import BigNumber from "bignumber.js";
 import {DateTime} from "luxon";
 
 export const BigNumberScalar = new GraphQLScalarType({
@@ -27,11 +27,11 @@ export const DateTimeScalar = new GraphQLScalarType({
         return fromIso(value);
     },
     serialize(value: DateTime) {
-        return value;
+        return toIso(value);
     },
     parseLiteral(ast) {
         if (ast.kind === Kind.STRING) {
-            return toIso(ast.value);
+            return fromIso(ast.value);
         }
         return null;
     },

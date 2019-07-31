@@ -1,36 +1,32 @@
 import "reflect-metadata";
-import {Field, ObjectType} from "type-graphql";
+import {Field, ObjectType, InputType} from "type-graphql";
 import {BigNumberScalar, DateTimeScalar} from "./scalar";
+import BigNumber from "bignumber.js";
 import {DateTime} from "luxon";
-import BigNumber from "bignumber";
 
-@ObjectType()
+@InputType("TransactionInput")
+@ObjectType("TransactionType")
 export class Transaction {
 
-    static create(id: string,
-                  price: BigNumber,
+    static create(price: BigNumber,
                   timestamp: DateTime): Transaction {
         return Object.assign(new Transaction(),
             {
-                id,
                 price,
                 timestamp,
             });
     }
 
-    @Field()
-    id!: string;
-
     @Field(type => BigNumberScalar)
     price!: BigNumber;
 
     @Field(type => DateTimeScalar)
-    timestamp: DateTime;
-
+    timestamp!: DateTime;
 
 }
 
-@ObjectType()
+@InputType("BlockInput")
+@ObjectType("BlockType")
 export class Block {
 
     static create(id: string,
