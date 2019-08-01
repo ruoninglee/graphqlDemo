@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"query\": \"mutation createTx($blockId: String!, $tx: TransactionInput!) { createTx(blockId: $blockId, tx: $tx) { price timestamp } }\",\n  \"operationName\": \"createTx\",\n  \"variables\": { \"blockId\": \"1\", \"tx\": {\"price\": \"123\", \"timestamp\": \"2019-07-31T05:15:40+08:00\"}}\n}"
+					"raw": "{\n  \"query\": \"mutation createTx($blockId: String!, $tx: TransactionInput!) { createTx(blockId: $blockId, tx: $tx) { price timestamp note tag} }\",\n  \"operationName\": \"createTx\",\n  \"variables\": { \n  \t\"blockId\": \"10\", \n  \t\"tx\": {\n  \t\t\"price\": \"123\", \n  \t\t\"timestamp\": \"2017\",\n  \t\t\"note\": \"abc\",\n  \t\t\"tag\": {\n  \t\t\t\"key\": \"value\"\n  \t\t}\n  \t}\n  \t\n  }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/graphql",
@@ -59,13 +59,6 @@
 					"port": "3000",
 					"path": [
 						"graphql"
-					],
-					"query": [
-						{
-							"key": "query",
-							"value": "mutation createTx($blockId: String!, $tx: TransactionInput!) {\n  createTx(blockId: $blockId, tx: $tx) {\n    price\n    timestamp\n  }\n}",
-							"disabled": true
-						}
 					]
 				}
 			},
