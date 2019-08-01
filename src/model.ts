@@ -1,19 +1,32 @@
 import "reflect-metadata";
-import {Field, ObjectType, InputType} from "type-graphql";
-import {BigNumberScalar, DateTimeScalar} from "./scalar";
+import {Field, InputType, ObjectType} from "type-graphql";
+import {BigNumberScalar, DateTimeScalar, TagMapScalar} from "./scalar";
 import BigNumber from "bignumber.js";
 import {DateTime} from "luxon";
+
+export class Tag {
+    qboJournalEntryId!: string;
+    sageLocationId?: string;
+    sageClassId?: string;
+
+    [key: string]: string | undefined;
+
+}
 
 @InputType("TransactionInput")
 @ObjectType("TransactionType")
 export class Transaction {
 
     static create(price: BigNumber,
-                  timestamp: DateTime): Transaction {
+                  timestamp: DateTime,
+                  note: string,
+                  tag: Tag): Transaction {
         return Object.assign(new Transaction(),
             {
                 price,
                 timestamp,
+                note,
+                tag,
             });
     }
 
@@ -22,6 +35,12 @@ export class Transaction {
 
     @Field(type => DateTimeScalar)
     timestamp!: DateTime;
+
+    @Field()
+    note!: string;
+
+    @Field(type => TagMapScalar)
+    tag!: Tag;
 
 }
 

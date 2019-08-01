@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import {Arg, Mutation, Query, Resolver} from "type-graphql";
 import {BlockService} from "./service";
-import {Block, Transaction} from "./model";
+import {Block, Tag, Transaction} from "./model";
 
 @Resolver()
 export class BlockResolver {
