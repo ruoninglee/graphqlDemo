@@ -13,7 +13,7 @@
     "@types/graphql": "^14.2.3",
     "@types/luxon": "1.15.2",
     "@types/lodash": "4.14.135",
-    "lodash": "4.17.11",
+    "lodash": "4.17.19",
     "luxon": "1.16.1",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
